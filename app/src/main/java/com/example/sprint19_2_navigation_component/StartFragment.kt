@@ -4,15 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.sprint19_2_navigation_component.databinding.FragmentStartBinding
 
 class StartFragment : Fragment() {
 
     private lateinit var binding: FragmentStartBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentStartBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -20,8 +24,20 @@ class StartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.catButton.setOnClickListener { }
+        binding.catButton.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_startFragment_to_factFragment, bundleOf(
+                    FactFragment.ARGS_FACT to getString(R.string.cat_fact)
+                )
+            )
+        }
 
-        binding.hamsterButton.setOnClickListener { }
+        binding.hamsterButton.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_startFragment_to_factFragment, bundleOf(
+                    FactFragment.ARGS_FACT to getString(R.string.hamster_fact)
+                )
+            )
+        }
     }
 }

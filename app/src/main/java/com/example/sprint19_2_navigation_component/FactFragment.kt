@@ -8,11 +8,16 @@ import androidx.fragment.app.Fragment
 import com.example.sprint19_2_navigation_component.databinding.FragmentFactBinding
 
 class FactFragment : Fragment() {
+    companion object {
+        const val ARGS_FACT = "fact"
+    }
 
     private lateinit var binding: FragmentFactBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentFactBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -20,7 +25,10 @@ class FactFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.imageButton.setOnClickListener {  }
+        val fact = requireArguments().getString(ARGS_FACT)
+        binding.fact.text = fact
+
+        binding.imageButton.setOnClickListener { }
 
         binding.back.setOnClickListener { }
 
